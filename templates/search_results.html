@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Results</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Search Results for "{{ query }}"</h1>
+      {% if results %}
+      <ul>
+        {% for result in results %}
+        <li>
+          <h2>
+            <a href="{{ url_for('show_lyrics', rank=result.rank) }}"
+              >{{ result.title }}</a
+            >
+          </h2>
+          <p><strong>Rank:</strong> {{ result.rank }}</p>
+          <p><strong>Artist:</strong> {{ result.artist }}</p>
+          <p><strong>Year:</strong> {{ result.year }}</p>
+          <p>{{ result.snippet }}</p>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No results found.</p>
+      {% endif %}
+    </div>
+  </body>
+</html>
